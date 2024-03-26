@@ -88,7 +88,7 @@ const UserProfile = () => {
           </h1>
           <form onSubmit={sendUserInformation}>
             <Input
-              label="first_name"
+              label="First Name"
               id="first_name"
               placeholder="Your first_name"
               type="text"
@@ -96,7 +96,7 @@ const UserProfile = () => {
               onValueChange={onValueChange}
             />
             <Input
-              label="last_name"
+              label="Last Name"
               id="last_name"
               placeholder="Your last_name"
               type="text"

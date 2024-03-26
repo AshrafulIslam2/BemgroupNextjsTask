@@ -41,15 +41,15 @@ const Carousel = () => {
     return () => clearInterval(interval); // Cleanup the interval on component unmount
   }, [imageIndex]);
   return (
-    <div className="max-w-[1320px] mx-auto py-24 border border-black relative ">
+    <div className=" max-w-[1320px] mx-auto py-2 lg:py-14  relative ">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
-        onClick={goToPrevSlide}
+        onClick={goToNextSlide}
         stroke="currentColor"
-        className="w-6 h-6 absolute top-[50%] bg-white cursor-pointer mx-2"
+        className="w-6 h-6 absolute top-[50%]  bg-white cursor-pointer mx-2"
       >
         <path
           stroke-linecap="round"
@@ -72,7 +72,7 @@ const Carousel = () => {
         stroke-width="1.5"
         onClick={goToPrevSlide}
         stroke="currentColor"
-        className="w-6 h-6 absolute top-[50%] right-0 bg-white cursor-pointer mx-2"
+        className="w-6 h-6 absolute top-[50%] right-4 lg:right-0 bg-white cursor-pointer mx-2"
       >
         <path
           stroke-linecap="round"

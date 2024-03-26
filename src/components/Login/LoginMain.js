@@ -37,9 +37,9 @@ const LoginMain = () => {
     router.push("/home");
   };
   return (
-    <div className="bg-white px-16 pt-8  pb-12 mb-4 rounded-xl shadow-2xl">
-      <h1 className="text-3xl font-medium mb-4 text-center">SignIn </h1>
-      <form onSubmit={sendUserInformation}>
+    <div className="bg-white px-4 sm:px-16 pt-8 min-w-[310px] pb-12 mb-4 rounded-xl shadow-2xl">
+      <h1 className="text-3xl font-medium mb-4 text-center">Login </h1>
+      <form onSubmit={sendUserInformation} className="w-full">
         <Input
           label="Email"
           id="email"
