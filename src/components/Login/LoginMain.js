@@ -1,9 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 import Input from "./Input";
-const defaultData = { email: "", password: "" };
+import { useRouter } from "next/navigation";
+const defaultData = { email: "", password: "", app: 2 };
 const LoginMain = () => {
   const [data, setData] = useState(defaultData);
+  const router = useRouter();
   const onValueChange = (e) => {
     const form = e.target.form;
     setData({ ...data, [e.target.name]: e.target.value });
@@ -12,9 +15,29 @@ const LoginMain = () => {
   const sendUserInformation = (e) => {
     e.preventDefault();
     console.log("data", data);
+
+    localStorage.setItem("data", "ashraful");
+    // fetch(`https://eservice.vemate.com/api/v1/account/public/users/signin/`, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data.message);
+    //     // form.reset();
+    //   });
+    // cookies.set("token", token, { httpOnly: true });
+    Cookies.set("token", "ash"); // Set HttpOnly cookie
+
+    router.push("/home");
   };
   return (
-    <div className="bg-white px-16 pt-8  pb-12 mb-4">
+    <div className="bg-white px-16 pt-8  pb-12 mb-4 rounded-xl shadow-2xl">
       <h1 className="text-3xl font-medium mb-4 text-center">SignIn </h1>
       <form onSubmit={sendUserInformation}>
         <Input
