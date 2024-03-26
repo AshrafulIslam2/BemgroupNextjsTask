@@ -17,20 +17,20 @@ const LoginMain = () => {
     console.log("data", data);
 
     localStorage.setItem("data", "ashraful");
-    // fetch(`https://eservice.vemate.com/api/v1/account/public/users/signin/`, {
-    //   method: "POST",
-    //   headers: {
-    //     "content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data.message);
-    //     // form.reset();
-    //   });
+    fetch(`https://eservice.vemate.com/api/v1/account/public/users/signin/`, {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data.message);
+        // form.reset();
+      });
     // cookies.set("token", token, { httpOnly: true });
     Cookies.set("token", "ash"); // Set HttpOnly cookie
 
