@@ -6,7 +6,7 @@ import { getCookie } from "./components/utils/cookies";
 export async function middleware(request) {
   const path = request.nextUrl.pathname;
   const publicPath = path === "/";
-  const token = request.cookies.get("token"); // Replace 'your_cookie_name' with the actual cookie name
+  const token = request.cookies.get("token");
   console.log(token);
 
   if (publicPath && token) {
@@ -17,7 +17,6 @@ export async function middleware(request) {
   }
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
   matcher: ["/", "/home", "/profile"],
 };
