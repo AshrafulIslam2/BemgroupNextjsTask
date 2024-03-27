@@ -1,10 +1,11 @@
 import LoginMain from "@/components/Login/LoginMain";
 import Image from "next/image";
+import Carousel from "@/components/home/Carousel";
 
 export default function Home() {
   return (
-    <main className=" bg-gray-100 flex w-full min-h-screen flex-col items-center justify-between p-24">
-      <LoginMain />
+    <main className="">
+      <Carousel></Carousel>
     </main>
   );
 }

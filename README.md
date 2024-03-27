@@ -3,6 +3,7 @@
 ## Getting Started
 
 First, run the development server:
+used npm install for install all dependecies 
 
 npm run dev
 # or

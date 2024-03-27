@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Cookies from "js-cookie";
 import Input from "./Input";
 import { useRouter } from "next/navigation";
-const defaultData = { email: "", password: "", app: 2 };
+const defaultData = { username: "", password: "", app: 2 };
 const LoginMain = () => {
   const [data, setData] = useState(defaultData);
   const router = useRouter();
@@ -14,10 +14,9 @@ const LoginMain = () => {
   };
   const sendUserInformation = (e) => {
     e.preventDefault();
-    console.log("data", data);
 
     localStorage.setItem("data", "ashraful");
-    fetch(`https://eservice.vemate.com/api/v1/account/public/users/signin/`, {
+    fetch(`https://market.vemate.com/api/v1/account/public/users/signin/`, {
       method: "POST",
       headers: {
         "content-Type": "application/json",
@@ -28,13 +27,11 @@ const LoginMain = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data.message);
+        console.log(data.token);
+        Cookies.set("token", data.token);
+        router.push("/");
         // form.reset();
       });
-    // cookies.set("token", token, { httpOnly: true });
-    Cookies.set("token", "ash"); // Set HttpOnly cookie
-
-    router.push("/home");
   };
   return (
     <div className="bg-white px-4 sm:px-16 pt-8 min-w-[310px] pb-12 mb-4 rounded-xl shadow-2xl">
@@ -42,7 +39,7 @@ const LoginMain = () => {
       <form onSubmit={sendUserInformation} className="w-full">
         <Input
           label="Email"
-          id="email"
+          id="username"
           placeholder="Your Email"
           type="email"
           value={data.name}

@@ -8,29 +8,33 @@ import { useRouter } from "next/navigation";
 const defaultData = { first_name: "", last_name: "" };
 const UserProfile = () => {
   const [data, setData] = useState(defaultData);
+  const [userInformation, setUserInformation] = useState();
   const router = useRouter();
+  const token = Cookies.get("token");
+  // console.log(token);
   const onValueChange = (e) => {
     const form = e.target.form;
     setData({ ...data, [e.target.name]: e.target.value });
-    console.log(data);
+    // console.log(data);
   };
+
   const sendUserInformation = (e) => {
     e.preventDefault();
-    console.log("data", data);
 
     const res = axios
       .patch(
-        "https://eservice.vemate.com/api/v1/account/public/users/profile/ ",
+        "https://market.vemate.com/api/v1/account/public/users/profile/",
         data,
         {
           headers: {
-            Authorization: `Bearer ashbdjasbdghasbhdbhjasjdhvjas`,
+            Authorization: `Token ${token}`,
             "Content-Type": "application/json",
           },
         }
       )
       .then((response) => {
-        console.log(response);
+        // console.log("this is user information");
+        setUserInformation(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -43,18 +47,14 @@ const UserProfile = () => {
   };
   useEffect(() => {
     const res = axios
-      .get(
-        "https://eservice.vemate.com/api/v1/account/public/users/profile/ ",
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ashbdjasbdghasbhdbhjasjdhvjas`,
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .get("https://market.vemate.com/api/v1/account/public/users/profile/", {
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
-        console.log(response);
+        setUserInformation(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -74,19 +74,23 @@ const UserProfile = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 p-16">
         <div className="border border-gray-300 shadow-xl flex  flex-col rounded-md justify-center gap-10 px-4">
           <div className="flex gap-3 text-justify ">
-            <h1>Name :</h1>
-            <h1>Ashraful Islam</h1>
+            <h1> First Name : </h1>
+            <h1>{userInformation?.first_name}</h1>
+          </div>
+          <div className="flex gap-3 text-justify ">
+            <h1>Last Name :</h1>
+            <h1>{userInformation?.last_name}</h1>
           </div>
           <div className="flex gap-3 ">
             <h1>Email :</h1>
-            <h1>email@gmail.com</h1>
+            <h1>{userInformation?.email}</h1>
           </div>
         </div>
         <div className="bg-white border h-full border-gray-300 rounded-md shadow-xl px-16 pt-8  pb-12 mb-4">
           <h1 className="text-3xl font-medium mb-4 text-center">
             Update Information{" "}
           </h1>
-          <form onSubmit={sendUserInformation}>
+          <form id="myForm" onSubmit={sendUserInformation}>
             <Input
               label="First Name"
               id="first_name"

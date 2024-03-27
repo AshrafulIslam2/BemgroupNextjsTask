@@ -5,18 +5,18 @@ import { getCookie } from "./components/utils/cookies";
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
   const path = request.nextUrl.pathname;
-  const publicPath = path === "/";
+  const publicPath = path === "/login";
   const token = request.cookies.get("token");
-  console.log(token);
+  // console.log(token);
 
   if (publicPath && token) {
     return NextResponse.redirect(new URL(path, request.nextUrl));
   }
   if (!publicPath && !token) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 }
 
 export const config = {
-  matcher: ["/", "/home", "/profile"],
+  matcher: ["/", "/login", "/profile"],
 };
